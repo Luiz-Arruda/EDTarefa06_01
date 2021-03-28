@@ -9,7 +9,7 @@ public class Main_Temperatura {
 	public static void main(String[] args) {
 		
 		int pos = 0;
-		int temperatura = 0;
+		double temperatura = 0;
 		int ops = 0;
 		
 		ListaTemperatura temperatura2 = new ListaTemperatura();
@@ -27,23 +27,22 @@ public class Main_Temperatura {
 					break;
 	
 				case 2:
-					temperatura = Integer.parseInt(JOptionPane.showInputDialog("Informe a temperatura: "));
+					temperatura = Double.parseDouble(JOptionPane.showInputDialog("Informe a temperatura: "));
 					temperatura2.AdicionaFinal(temperatura);
 					break;
 				
 				case 3:
-					temperatura = Integer.parseInt(JOptionPane.showInputDialog("Informe a temperatura: "));
+					temperatura = Double.parseDouble(JOptionPane.showInputDialog("Informe a temperatura: "));
 					temperatura2.AdicionaInicio(temperatura);
 					break;
 					
 				case 4:
-					temperatura = Integer.parseInt(JOptionPane.showInputDialog("Informe a temperatura: "));
+					temperatura = Double.parseDouble(JOptionPane.showInputDialog("Informe a temperatura: "));
 					pos = Integer.parseInt(JOptionPane.showInputDialog("Informe a posição de inserção: "));
 					temperatura2.escolherposição(temperatura, pos);
 					break;
 					
 				case 5:   // remove no final
-//					JOptionPane.showConfirmDialog(null, "O elemento removido foi: " +temperatura2.RemoveFinal());
 					System.out.println("O elemento removido foi: " +temperatura2.RemoveFinal());
 
 					break;
@@ -68,12 +67,6 @@ public class Main_Temperatura {
 				default:
 					break;
 				}
-			
-//			temperatura = Double.parseDouble(JOptionPane.showInputDialog(null; "Informe a temperatura"));
-			
-} // fim while
-		
-		
-
+			} // fim while
 	} // fim do maim
 }  // fim da classe 

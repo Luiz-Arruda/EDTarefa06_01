@@ -16,33 +16,37 @@ public class ListaTemperatura {
 		return false;				// lista preencida
 	} // fim Lista Vazia
 	
-	public void AdicionaFinal(int e) { 	// 2 -  cria metodo adicionar no final da lista
+	public void AdicionaFinal(double e) { 	// 2 -  cria metodo adicionar no final da lista
+		NO n = new NO(e);	
+		
 		if (inicio == null) {			// verifica se a lista está vazia
-			NO n = new NO(e);			// carrega o valor de "e" no nó criado
 			inicio = n;					// carrega inicio com "n" - novo nó criado
+			n.prox = null;
 		}  // fim if
+		
 		else {
-			try {
-				NO aux = inicio;				// cria endereço de nó "aux" e carrega com o endereço de inicio
-				while (aux.prox != null) {		// prox vem da classe contructor NO
-					aux = aux.prox;				// vai movendo aux para a proximo endereço
-				} // fim while
-				NO n = new NO(e);				// cria um novo nó com endereço "n" e carrega dado "e"
-				aux.prox = n;						// carrega n aux o endereço de n		
-			} catch (Exception e2) {
-				System.out.println("Erro de gravação");
-			}
+			NO aux = BuscarUltimo(inicio);  // chamar a recorrencia 
+			aux.prox = n;
+			
 		}  // fim do else
+	
 	} // fim do metodo
 	
-	public void AdicionaInicio(int e) {			// 3 adicionar no inicio da lista
+	public NO BuscarUltimo(NO aux) {
+		if (aux.prox != null) {
+			return BuscarUltimo(aux.prox);
+		}
+		return aux;
+	} // fim Buscar último
+	
+	public void AdicionaInicio(double e) {			// 3 adicionar no inicio da lista
 		NO n = new NO(e);						// criando novo no "n"
 		n.prox = inicio;						// carregar n com o proxima endereço
 		inicio = n;								// carrecar incio n
 	}
 	
-	public int RemoveFinal() {					// 4 remover no final da lista
-		int r = -1;								// criar uma variavel 
+	public double RemoveFinal() {					// 4 remover no final da lista
+		double r = -1;								// criar uma variavel 
 		if (inicio == null ) {
 			JOptionPane.showConfirmDialog(null, "Lista Vázia");
 		}
@@ -51,24 +55,37 @@ public class ListaTemperatura {
 				r = inicio.dados;				// carregar a variavel com o conteudo do dado
 				inicio = null;					// informa que é o ultimo elemento da lista
 			} // fim IF
+				
 			else {
-				NO aux1 = inicio;			// gerando duas varias, uma para varrer a lista
-				NO aux2 = inicio;
 				
-				while (aux1.prox !=null) {  // varrendo a lista até encontrar null
-					aux2 = aux1;			// guarda o endereço no utimo endereço em aux2
-					aux1 = aux1.prox;		// pega o proximo endereço
-				} // fim while
+				NO aux = LocalizaDadosRemocaoFim(inicio,inicio);
+				r = aux.prox.dados;
+				aux.prox = null;
 				
-				r = aux1.dados;				// guarda em "r" o dado de aux1
-				aux2.prox = null;			// coloca null para mostrar o fim da lista. 
+//				NO aux1 = inicio;			// gerando duas varias, uma para varrer a lista
+//				NO aux2 = inicio;
+//				
+//				while (aux1.prox !=null) {  // varrendo a lista até encontrar null
+//					aux2 = aux1;			// guarda o endereço no utimo endereço em aux2
+//					aux1 = aux1.prox;		// pega o proximo endereço
+//				} // fim while
+//				
+//				r = aux1.dados;				// guarda em "r" o dado de aux1
+//				aux2.prox = null;			// coloca null para mostrar o fim da lista. 
 			} // fim else
 		} // fim else
 		return r;
 	} // fim classe
 	
-	public int RemoverInicio() {			// 5 remover no inico da lista
-		int r = -1;
+	public NO LocalizaDadosRemocaoFim(NO aux1, NO aux2) {
+		if (aux1.prox != null) {
+			return LocalizaDadosRemocaoFim(aux1.prox, aux1);
+		}
+		return aux2;
+	} // fim Localiza Dados Remocao Fim 
+	
+	public double RemoverInicio() {			// 5 remover no inico da lista
+		double r = -1;
 		if (inicio == null) {
 			JOptionPane.showConfirmDialog(null, "Lista Vazia");
 		} // fim inicio 
@@ -79,7 +96,7 @@ public class ListaTemperatura {
 		return r;
 	} // fim da classe Remove Inicio
 	
-	public void escolherposição(int e, int pos) {
+	public void escolherposição(double e, int pos) {
 		NO novo = new NO(e);		
 		
 		if (pos == 1) {
@@ -105,8 +122,8 @@ public class ListaTemperatura {
 		} // fim else
 	} // classe inserir em qualquer posição
 	
-	public int EscolheRemover(int pos) {
-		int e = -1;
+	public double EscolheRemover(int pos) {
+		double e = -1;
 		int i = 1; 
 		NO aux = inicio;	// criar um endereçamento aux com valor inicial
 		
@@ -156,11 +173,9 @@ public class ListaTemperatura {
 			NO aux1 = inicio;	// criação de duas variaveis
 			
 			while (aux1 != null) {
-//				JOptionPane.showConfirmDialog(null, aux1.dados);
 				System.out.println(aux1.dados);
 				aux1 = aux1.prox;
 			}
 		} // fim else
 	} // fim percorre lista
-	
 } // fim da classe
